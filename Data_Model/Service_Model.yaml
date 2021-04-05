@@ -1,0 +1,41 @@
+# /Users/scrimaglia/Nepal/Casos_de_Uso/config_compliance
+# /var/lib/jenkins/workspace/CONFIG_COMPLIANCE
+---
+Service_Model:
+  Servicio: Configuration Any Cisco Feature
+  Env:
+    project_path: /var/lib/jenkins/workspace/CONFIG_CISCO_FEATURE
+    debug: no
+    ansible_hosts: legacy_switched_lab
+    ansible_command_timeout: 180
+    module_command_timeout: 1800
+    time_zone: America/Argentina/Buenos_Aires
+    save_facts: no
+    files: files
+    temp: temp
+  Get_Facts:
+    - show run
+    - show vlan
+    - show interfaces status
+    - show etherchannel summary
+    - show logging
+    - show version
+    - show spanning-tree
+    - show spanning-tree blockedports
+  Mongo:
+    ip: 10.54.158.129
+    port: 27017
+    dbname: master_configs
+    collectionname: master
+  Devices:
+    - name: NEPAL_SW_CORE_1
+      platform: ios
+      feature:
+        command: banner login
+        start_delimiter: c
+        end_delimiter: c
+        variable: "*****************************************
+                  *      Bienvenido a NEP@L Simulator     *
+                  *****************************************"
+     
+  

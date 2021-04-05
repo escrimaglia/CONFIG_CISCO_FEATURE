@@ -1,0 +1,31 @@
+[all:vars]
+ansible_port=22
+ansible_python_interpreter=/usr/local/bin/python3
+ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
+ansible_ssh_user=nepal
+ansible_ssh_pass=cisco1234
+ansible_become_pass=cisco1234
+ansible_become_method=enable
+
+
+[legacy_switched_lab]
+NEPAL_SW_CORE_1 ansible_host=10.54.154.151
+NEPAL_SW_CORE_2 ansible_host=10.54.154.154
+NEPAL_SW_DIST_1 ansible_host=10.54.154.152
+NEPAL_SW_DIST_2 ansible_host=10.54.154.153
+NEPAL_SW_FLOOR_1 ansible_host=10.54.154.155
+NEPAL_SW_FLOOR_2 ansible_host=10.54.154.156
+NEPAL_SW_DATA_CENTER ansible_host=10.54.154.157
+
+[legacy_switched_lab:vars]
+ansible_network_os=ios
+
+[legacy_switched_lab_server]
+NEPAL_SW_CENTRAL_SERVER ansible_host=10.54.154.150
+
+[legacy_switched_lab_server:vars]
+ansible_ssh_user=ubuntu
+ansible_ssh_pass=cisco
+ansible_sudo_pass=cisco
+ansible_python_interpreter=/usr/bin/python3
+
