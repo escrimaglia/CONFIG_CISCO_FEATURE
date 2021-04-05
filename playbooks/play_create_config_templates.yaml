@@ -1,0 +1,39 @@
+# Create templates, Configuration Any Cisco Feature Service
+# By Ed Scrimaglia
+- name: Select list of servers
+  hosts: localhost
+  gather_facts: no
+
+  vars_files:
+    - ../Data_Model/Service_Model.yaml
+  
+  tasks:
+    - name: Set Facts
+      set_fact:
+        var_hosts: "{{Service_Model.Env.ansible_hosts}}"
+        debug: "{{Service_Model.Env.debug}}"
+
+- name: Create and activate syslog
+  hosts: "{{hostvars['localhost']['var_hosts']}}"
+  connection: network_cli
+  gather_facts: no
+  
+  vars_files:
+    - ../Data_Model/Service_Model.yaml
+
+  tasks:
+    - name: Create config template
+      template:
+        src: "{{Service_Model.Env.project_path}}/templates/config_login_banner.j2"
+        dest: "{{Service_Model.Env.project_path}}/configuraciones/syslog_{{inventory_hostname}}_config_feature.cfg"
+      when:  ansible_network_os == item.platform
+      loop:
+        "{{ Service_Model.Devices}}"
+
+    - name: Delete config template
+      template:
+        src: "{{Service_Model.Env.project_path}}/templates/delete_login_banner.j2"
+        dest: "{{Service_Model.Env.project_path}}/configuraciones/syslog_{{inventory_hostname}}_delete_feature.cfg"
+      when:  ansible_network_os == item.platform
+      loop:
+        "{{ Service_Model.Devices}}"

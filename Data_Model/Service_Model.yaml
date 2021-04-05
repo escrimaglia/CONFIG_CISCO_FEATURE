@@ -30,12 +30,19 @@ Service_Model:
   Devices:
     - name: NEPAL_SW_CORE_1
       platform: ios
-      feature:
-        command: banner login
-        start_delimiter: c
-        end_delimiter: c
-        variable: "*****************************************
-                  *      Bienvenido a NEP@L Simulator     *
-                  *****************************************"
-     
-  
+      features:
+        - command: banner login
+          start_delimiter: c
+          end_delimiter: c
+          variable: "*****************************************
+                    *      Bienvenido a NEP@L Simulator     *
+                    *****************************************"
+    - name: NEPAL_SW_CORE_2
+      platform: ios
+      features:
+        - command: banner login
+          start_delimiter: c
+          end_delimiter: c
+          variable: "*****************************************
+                    *      Bienvenido a NEP@L Simulator     *
+                    *****************************************"

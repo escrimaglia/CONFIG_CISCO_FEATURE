@@ -1,0 +1,49 @@
+# Config Feature, Configuration Any Cisco Feature Service
+# By Ed Scrimaglia
+---
+- name: Select list of servers
+  hosts: localhost
+  gather_facts: no
+
+  vars_files:
+    - ../Data_Model/Service_Model.yaml
+  
+  tasks:
+    - name: Set Facts
+      set_fact:
+        var_hosts: "{{Service_Model.Env.ansible_hosts}}"
+        
+
+- name: Create and activate syslog
+  hosts: "{{hostvars['localhost']['var_hosts']}}"
+  connection: network_cli
+  gather_facts: no
+  
+  vars_files:
+    - ../Data_Model/Service_Model.yaml
+
+  tasks:
+    - name: Set Facts
+      set_fact:
+        debug: "{{Service_Model.Env.debug}}"
+        project_path: "{{Service_Model.Env.project_path}}"
+      loop:
+        "{{Service_Model.Devices}}"
+      when:  ansible_network_os == item.platform
+
+    - name: Activate Logging all devices
+      ios_config:
+        src: "{{project_path}}/configuraciones/syslog_{{inventory_hostname}}_create.cfg"
+      register: result
+      when: activate_v | bool == true
+
+    - name: Delete Logging all devices
+      ios_config:
+        src: "{{project_path}}/configuraciones/syslog_{{inventory_hostname}}_delete.cfg"
+      register: result
+      when: activate_v | bool == false
+
+    - name: Show Activate/Delete Logging
+      debug:
+        var: result
+      when: debug == true
