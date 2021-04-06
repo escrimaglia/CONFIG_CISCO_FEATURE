@@ -14,7 +14,7 @@
         var_hosts: "{{Service_Model.Env.ansible_hosts}}"
         
 
-- name: Create and activate syslog
+- name: Create Features
   hosts: "{{hostvars['localhost']['var_hosts']}}"
   connection: network_cli
   gather_facts: no
@@ -30,16 +30,35 @@
         activate_v: true
     
     - name: Activate Feture on devices
-      ios_config:
-        src: "{{project_path}}/configuraciones/{{inventory_hostname}}_config_feature.cfg"
-      register: result
+      block:
+        - name: Activate config
+          ios_banner:
+            banner: login
+            text: "{{ lookup('file', '../configuraciones/{{inventory_hostname}}_config_feature.cfg') }}"
+            state: present
+          register: result
+        
+        # - name: save running to startup when modified
+        #   ios_config:
+        #     save_when: modified
       when: activate_v | bool == true
 
     - name: Delete Feature on devices
-      ios_config:
-        src: "{{project_path}}/configuraciones/{{inventory_hostname}}_delete_feature.cfg"
-      register: result
+      block:
+        - name: Delete config
+          ios_banner:
+            banner: login
+            state: absent
+          register: result
+
+        # - name: save running to startup when modified
+        #   ios_config:
+        #     save_when: modified
       when: activate_v | bool == false
+
+    - name: save running to startup when modified
+          ios_config:
+            save_when: modified
 
     - name: Show Activate/Delete Feature
       debug:

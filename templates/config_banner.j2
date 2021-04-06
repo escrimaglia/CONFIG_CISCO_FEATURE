@@ -1,15 +1,14 @@
-!
 {% for cmd in Service_Model.Features %}
-{% if cmd.param_1|length %}
-{{cmd.command}} {{cmd.param_1}}
-{% else %}
+{% if cmd.command %}
 {{cmd.command}}
 {% endif %}
-{% if cmd.datos|length %}
-{{cmd.datos}}
+{% if cmd.param_1 %}
+{{cmd.param_1}}
 {% endif %}
-{% if cmd.param_2|length %}
+{% if cmd.param_2 %}
 {{cmd.param_2}}
 {% endif %}
+{% if cmd.datos %}
+{{cmd.datos}}
+{% endif %}
 {% endfor %}
-!

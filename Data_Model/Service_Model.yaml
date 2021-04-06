@@ -27,11 +27,11 @@ Service_Model:
     dbname: master_configs
     collectionname: master
   Features:
-    - command: banner login
-      platform: ios
-      param_1: c
-      param_2: c
+    - platform: ios
+      command: no
+      param_1: no
+      param_2: no
       datos: |
         *****************************************
-        *      Bienvenido a NEP@L Simulator     *
+        *      Bienvenido a NEPaL Simulator     *
         *****************************************
