@@ -37,10 +37,6 @@
             text: "{{ lookup('file', '../configuraciones/{{inventory_hostname}}_config_feature.cfg') }}"
             state: present
           register: result
-        
-        # - name: save running to startup when modified
-        #   ios_config:
-        #     save_when: modified
       when: activate_v | bool == true
 
     - name: Delete Feature on devices
@@ -50,15 +46,11 @@
             banner: login
             state: absent
           register: result
-
-        # - name: save running to startup when modified
-        #   ios_config:
-        #     save_when: modified
       when: activate_v | bool == false
 
     - name: save running to startup when modified
-          ios_config:
-            save_when: modified
+      ios_config:
+        save_when: modified
 
     - name: Show Activate/Delete Feature
       debug:
