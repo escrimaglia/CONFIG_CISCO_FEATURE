@@ -1,9 +1,9 @@
 !
 {% for cmd in Service_Model.Features %}
 {% if cmd.param_1|length %}
-{{cmd.commad}} {{cmd.param_1}}
+{{cmd.command}} {{cmd.param_1}}
 {% else %}
-{{cmd.commad}}
+{{cmd.command}}
 {% endif %}
 {% if cmd.datos|length %}
 {{cmd.datos}}

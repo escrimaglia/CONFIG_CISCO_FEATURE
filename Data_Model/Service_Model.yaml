@@ -3,7 +3,7 @@
 Service_Model:
   Servicio: Configuration Any Cisco Feature
   Env:
-    project_path: /var/lib/jenkins/workspace/CONFIG_CISCO_FEATURE
+    project_path: /Users/scrimaglia/Nepal/Casos_de_Uso/config_cisco_feature
     debug: no
     ansible_hosts: legacy_switched_lab
     ansible_command_timeout: 180
@@ -31,6 +31,7 @@ Service_Model:
       platform: ios
       param_1: c
       param_2: c
-      datos: "*****************************************
-              *      Bienvenido a NEP@L Simulator     *
-              *****************************************"
+      datos: |
+        *****************************************
+        *      Bienvenido a NEP@L Simulator     *
+        *****************************************

@@ -13,7 +13,7 @@
         var_hosts: "{{Service_Model.Env.ansible_hosts}}"
         debug: "{{Service_Model.Env.debug}}"
 
-- name: Create and activate syslog
+- name: Create Features templates
   hosts: "{{hostvars['localhost']['var_hosts']}}"
   connection: network_cli
   gather_facts: no

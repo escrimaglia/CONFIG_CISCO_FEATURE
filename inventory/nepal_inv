@@ -10,12 +10,12 @@ ansible_become_method=enable
 
 [legacy_switched_lab]
 NEPAL_SW_CORE_1 ansible_host=10.54.154.151
-NEPAL_SW_CORE_2 ansible_host=10.54.154.154
-NEPAL_SW_DIST_1 ansible_host=10.54.154.152
-NEPAL_SW_DIST_2 ansible_host=10.54.154.153
-NEPAL_SW_FLOOR_1 ansible_host=10.54.154.155
-NEPAL_SW_FLOOR_2 ansible_host=10.54.154.156
-NEPAL_SW_DATA_CENTER ansible_host=10.54.154.157
+#NEPAL_SW_CORE_2 ansible_host=10.54.154.154
+#NEPAL_SW_DIST_1 ansible_host=10.54.154.152
+#NEPAL_SW_DIST_2 ansible_host=10.54.154.153
+#NEPAL_SW_FLOOR_1 ansible_host=10.54.154.155
+#NEPAL_SW_FLOOR_2 ansible_host=10.54.154.156
+#NEPAL_SW_DATA_CENTER ansible_host=10.54.154.157
 
 [legacy_switched_lab:vars]
 ansible_network_os=ios
