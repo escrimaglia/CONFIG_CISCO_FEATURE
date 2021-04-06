@@ -1,9 +1,0 @@
-!
-{% for line in Service_Model.Devices %}
-{% for cmd in line.features %}
-{{cmd.commad}} {{cmd.start_delimiter}}
-{{cmd.variable}}
-{{cmd.stop_delimiter}}
-{% endfor %}
-{% endfor %}
-!

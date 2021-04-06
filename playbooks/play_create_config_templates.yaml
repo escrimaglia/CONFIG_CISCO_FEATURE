@@ -24,16 +24,16 @@
   tasks:
     - name: Create config template
       template:
-        src: "{{Service_Model.Env.project_path}}/templates/config_login_banner.j2"
-        dest: "{{Service_Model.Env.project_path}}/configuraciones/syslog_{{inventory_hostname}}_config_feature.cfg"
+        src: "{{Service_Model.Env.project_path}}/templates/config_banner.j2"
+        dest: "{{Service_Model.Env.project_path}}/configuraciones/{{inventory_hostname}}_config_feature.cfg"
       when:  ansible_network_os == item.platform
       loop:
-        "{{ Service_Model.Devices}}"
+        "{{ Service_Model.Features}}"
 
     - name: Delete config template
       template:
-        src: "{{Service_Model.Env.project_path}}/templates/delete_login_banner.j2"
-        dest: "{{Service_Model.Env.project_path}}/configuraciones/syslog_{{inventory_hostname}}_delete_feature.cfg"
+        src: "{{Service_Model.Env.project_path}}/templates/delete_banner.j2"
+        dest: "{{Service_Model.Env.project_path}}/configuraciones/{{inventory_hostname}}_delete_feature.cfg"
       when:  ansible_network_os == item.platform
       loop:
-        "{{ Service_Model.Devices}}"
+        "{{ Service_Model.Features}}"
