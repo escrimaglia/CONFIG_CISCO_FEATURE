@@ -1,4 +1,3 @@
-# /Users/scrimaglia/Nepal/Casos_de_Uso/config_compliance
 # /var/lib/jenkins/workspace/CONFIG_COMPLIANCE
 ---
 Service_Model:
@@ -27,22 +26,11 @@ Service_Model:
     port: 27017
     dbname: master_configs
     collectionname: master
-  Devices:
-    - name: NEPAL_SW_CORE_1
+  Features:
+    - command: banner login
       platform: ios
-      features:
-        - command: banner login
-          start_delimiter: c
-          end_delimiter: c
-          variable: "*****************************************
-                    *      Bienvenido a NEP@L Simulator     *
-                    *****************************************"
-    - name: NEPAL_SW_CORE_2
-      platform: ios
-      features:
-        - command: banner login
-          start_delimiter: c
-          end_delimiter: c
-          variable: "*****************************************
-                    *      Bienvenido a NEP@L Simulator     *
-                    *****************************************"
+      param_1: c
+      param_2: c
+      datos: "*****************************************
+              *      Bienvenido a NEP@L Simulator     *
+              *****************************************"
