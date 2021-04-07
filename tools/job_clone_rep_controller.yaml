@@ -1,0 +1,75 @@
+# Clone repository from GigHub to NEP@L Controller
+# By Ed Scrimaglia
+---
+    - name: "*** Playbook clone repository to NEP@L controller ***"
+      hosts: controller
+      gather_facts: no
+
+      vars_files:
+        - ../Data_Model/Service_Model.yaml
+    
+      vars:
+        project: CONFIG_CISCO_FEATURE
+        controller_project_path: /var/ansible-runner/project/
+        repository: git@github.com:escrimaglia/CONFIG_CISCO_FEATURE.git
+        owner: controller
+    
+      tasks:
+        - name: Set Facts
+          set_fact:
+            debug: "{{Service_Model.Env.debug}}"
+            files_d: "{{Service_Model.Env.files}}"
+
+        - name: Add a new github ssh key
+          copy:
+            src=~/.ssh/id_rsa.github
+            dest=~/.ssh/id_rsa.github
+            owner=root
+            group=root
+            mode=0600
+
+        - name: Clone a private repository
+          git:
+            repo="{{repository}}"
+            dest="{{controller_project_path}}{{project}}"
+            key_file=~/.ssh/id_rsa.github
+            force=yes
+          register: salida
+    
+        - name: Show Clone a private repository
+          debug:
+            var: salida
+          when: debug == true
+    
+        - name: Replace Data_Model path line
+          lineinfile:
+            path: "{{controller_project_path}}{{project}}/Data_Model/Service_Model.yaml"
+            regexp: 'project_path: /var/lib/jenkins/workspace/CONFIG_CISCO_FEATURE'
+            line: "    project_path: /var/ansible-runner/project/{{project}}"
+            owner: "{{owner}}"
+            group: root
+            mode: u=rw,g=r,o=r
+          register: salida
+
+        - name: Replace Data_Model path line
+          debug:
+            var: salida
+          when: debug == true
+
+        - name: Delete password from inventory file
+          lineinfile: 
+            dest="{{controller_project_path}}{{project}}/inventory/nepal_inv"
+            regexp="{{item}}"
+            state=absent
+          register: salida
+          loop:
+            - 'ansible_ssh_user'
+            - 'ansible_ssh_pass'
+            - 'ansible_become_pass'
+          loop_control:
+            label: "{{item}}"
+    
+        - name: Show Delete password from inventory file
+          debug:
+            var: salida
+          when: debug == true
