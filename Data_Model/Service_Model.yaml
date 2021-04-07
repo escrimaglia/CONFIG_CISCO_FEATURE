@@ -27,8 +27,9 @@ Service_Model:
     dbname: master_configs
     collectionname: master
   Features:
-    - platform: ios
-      banner: login
+    - type: banner
+      sub_type: login
+      platform: ios
       command: no
       param_1: no
       param_2: no
