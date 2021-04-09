@@ -40,7 +40,7 @@
           loop:
             "{{Service_Model.Features}}"
       when:
-        - ctivate_v | bool == true
+        - activate_v | bool == true
         - item.type == 'banner'
         - item.sub_type in ['login','motd','exec','incoming','slip-ppp']
       
