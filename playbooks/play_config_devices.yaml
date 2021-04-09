@@ -39,7 +39,10 @@
           register: result
           loop:
             "{{Service_Model.Features}}"
-      when: activate_v | bool == true and item.type == 'banner'
+      when:
+        - ctivate_v | bool == true
+        - item.type == 'banner'
+        - item.sub_type in ['login','motd','exec','incoming','slip-ppp']
       
     - name: Delete Feature on devices
       block:
@@ -50,7 +53,10 @@
           register: result
           loop:
             "{{Service_Model.Features}}"
-      when: activate_v | bool == false and item.type == 'banner'
+      when: 
+        - activate_v | bool == false
+        - and item.type == 'banner'
+        - item.sub_type in ['login','motd','exec','incoming','slip-ppp']
 
     - name: save running to startup when modified
       ios_config:
