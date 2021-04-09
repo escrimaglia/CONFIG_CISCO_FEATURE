@@ -55,7 +55,7 @@
             "{{Service_Model.Features}}"
       when: 
         - activate_v | bool == false
-        - and item.type == 'banner'
+        - item.type == 'banner'
         - item.sub_type in ['login','motd','exec','incoming','slip-ppp']
 
     - name: save running to startup when modified
