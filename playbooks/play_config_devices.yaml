@@ -37,10 +37,10 @@
             text: "{{ lookup('file', '../configuraciones/{{inventory_hostname}}_config_feature.cfg') }}"
             state: present
           register: result
+          loop:
+            "{{Service_Model.Features}}"
       when: activate_v | bool == true and item.type == 'banner'
-      loop:
-        "{{Service_Model.Features}}"
-
+      
     - name: Delete Feature on devices
       block:
         - name: Delete config
@@ -48,6 +48,8 @@
             banner: "{{item.sub_type}}"
             state: absent
           register: result
+          loop:
+            "{{Service_Model.Features}}"
       when: activate_v | bool == false and item.type == 'banner'
 
     - name: save running to startup when modified
