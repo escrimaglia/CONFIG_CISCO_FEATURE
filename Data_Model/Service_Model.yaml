@@ -1,4 +1,12 @@
 # /var/lib/jenkins/workspace/CONFIG_CISCO_FEATURE
+#
+# Usage:
+# Feature type: Bbanner
+#         sub_type: login
+#                   motd
+#                   exec
+#                   incoming
+#                   slip-ppp
 ---
 Service_Model:
   Servicio: Configuration Any Cisco Feature
