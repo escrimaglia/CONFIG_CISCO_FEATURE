@@ -20,13 +20,13 @@
             debug: "{{Service_Model.Env.debug}}"
             files_d: "{{Service_Model.Env.files}}"
 
-        - name: Add a new github ssh key
-          copy:
-            src=~/.ssh/id_rsa.github
-            dest=~/.ssh/id_rsa.github
-            owner=root
-            group=root
-            mode=0600
+        # - name: Add a new github ssh key
+        #   copy:
+        #     src=~/.ssh/id_rsa.github
+        #     dest=~/.ssh/id_rsa.github
+        #     owner=root
+        #     group=root
+        #     mode=0600
 
         - name: Clone a private repository
           git:
