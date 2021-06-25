@@ -1,15 +1,15 @@
-# Bind/Unbind Config Banner Service.
+# Fail/Success Selector.
 # By Ed Scrimaglia
 ---
-    - name: "*** Bind/Unbind Banner ***"
-      hosts: localhost
-      gather_facts: False
-      
-      vars:
-        state: absent
-    
-      tasks:
-        - name: Set Facts
-          set_fact:
-            state: "{{state}}"
-          failed_when: state == 'absent'
+- name: "*** Bind/Unbind Banner ***"
+  hosts: localhost
+  gather_facts: False
+  
+  vars:
+    state: absent
+
+  tasks:
+    - name: Set Facts
+      set_fact:
+        state: "{{state}}"
+      failed_when: state == 'absent'
